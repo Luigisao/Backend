@@ -1,16 +1,16 @@
 class Usuario{
 
-    constructor(nombre, apellido,libros=[]){
+    constructor(nombre, apellido,libros=[],mascotas=[]){
 
         this.nombre = nombre;
         this.apellido= apellido;
         this.libros = libros;
-        this.mascotas=[];
+        this.mascotas= mascotas;
 
     }
 
     getFullName() {
-      console.log (`El nombre del usuario es ${this.nombre} ${this.apellido}`); 
+    return  console.log (`El nombre del usuario es ${this.nombre} ${this.apellido}`); 
     }
 
     addMascota(mascota){
@@ -19,7 +19,7 @@ class Usuario{
     }
 
     countMascota(){
-        console.log (this.mascotas.length)
+        return this.mascotas.length
     }
 
     addBook(nombre, autor){
@@ -30,9 +30,9 @@ class Usuario{
     getBookNames(){
 
         let nombresLibro = this.libros.map((libros) => {
-            return libros.nombre
+            console.log( libros.nombre)
         })
-        console.log(nombresLibro)
+        return nombresLibro
     }
 
 
@@ -50,9 +50,7 @@ usuario.addBook('Harry Potter', 'J.K.R')
 usuario.addBook('Señor de los Anillos', 'Tolkien')
 
 console.log(usuario)
-
-usuario.countMascota()
+console.log(usuario.countMascota()
+)
 usuario.getBookNames()
-
-
 
