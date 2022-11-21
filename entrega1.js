@@ -1,56 +1,82 @@
-class Usuario{
+class ProductManager {
+   constructor(){
+       this.products = [];
+   }
+   getNextId = () =>{
+       const count = this.products.length
+       const nextId = (count > 0) ? this.products[count-1].id +1 : 1
+     
+       return nextId
+     
+ }
 
-    constructor(nombre, apellido,libros=[],mascotas=[]){
+   getProducts = () =>{
+      if(this.products.length > 0){
+       console.log(this.products) 
+      }
+      else{
+       console.log("No hay ningun producto")
+      }
+   }
+   getProductsById = (id) =>{
+       let getid = this.products.find((product) => product.id === id);
+       getid ? console.log(getid) : console.log(`Not Found`)
+   }
 
-        this.nombre = nombre;
-        this.apellido= apellido;
-        this.libros = libros;
-        this.mascotas= mascotas;
+   addProduct = (title,description,price,thumbnail,stock, code,date) => {
 
-    }
+   if ((title, description, price, thumbnail, stock,code)) {
 
-    getFullName() {
-    return  console.log (`El nombre del usuario es ${this.nombre} ${this.apellido}`); 
-    }
+   const getcode=this.products.find((el)=>el.code==code)
 
-    addMascota(mascota){
-        this.mascotas.push(mascota)
-        
-    }
+      if(getcode){
+         console.log(`El code ya existe, agrega otro, tampoco es tan dificil... hay 3 productos.`)
+      }else{
 
-    countMascota(){
-        return this.mascotas.length
-    }
+      if (this.products.length > 0) {
+      let productId = this.products[this.products.length - 1].id + 1;
+      let product = {
+                    id: productId,
+                    title,
+                    description,
+                    price,
+                    thumbnail,
+                    stock,
+                    code,
+                    date: date ?? new Date().toLocaleDateString(),
+                    };
 
-    addBook(nombre, autor){
-        let nuevoLibro = {nombre, autor};
-        this.libros.push(nuevoLibro);
-    }
+      this.products.push(product);
 
-    getBookNames(){
-
-        let nombresLibro = this.libros.map((libros) => {
-            console.log( libros.nombre)
-        })
-        return nombresLibro
-    }
-
-
+      } else {
+    
+      let product = {
+                   id: 1,
+                   title,
+                   description,
+                   price,
+                   thumbnail,
+                   stock,
+                   code
+                 };
+                 this.products.push(product);
+               }
+             }
+           } else {
+             console.log(`Porfavor agrega todos los detalles del producto`);
+           }
+         };
 
 }
 
-const usuario = new Usuario ('Luigi', 'Marenco')
+const productos = new ProductManager();
 
-usuario.getFullName()
 
-usuario.addMascota('Canario')
-usuario.addMascota('Perro')
+productos.addProduct("Vino 1","Un sabor inigualable",3500,"img",4,68)
+productos.addProduct("Vino 2","medio pelo",1500,"url",5,2 ,)
+productos.addProduct("Vino 3","ubita carton",3500,"url",54,)
 
-usuario.addBook('Harry Potter', 'J.K.R')
-usuario.addBook('Señor de los Anillos', 'Tolkien')
 
-console.log(usuario)
-console.log(usuario.countMascota()
-)
-usuario.getBookNames()
-
+productos.getProducts()
+productos.getProductsById(2)
+productos.getProductsById(4)
